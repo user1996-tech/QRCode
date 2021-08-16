@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { GLOBAL } from './GLOBAL';
 
 const TabBar = () => {
@@ -13,7 +14,7 @@ const TabBar = () => {
             id: 0,
             name: 'QRScanScreen',
             label: 'QR Scan',
-            icon: () => (<Icon name="rocket" size={10} color="#900" />),
+            icon: () => (<Ionicons name="md-scan" size={20} color="black" />),
             goto: 'QRScanScreen',
             activeStyle: {},
             navGroup: ["QRScanScreen"],
@@ -22,7 +23,7 @@ const TabBar = () => {
             id: 1,
             name: 'QRCreateScreen',
             label: 'QR Create',
-            icon: () => (<Icon name="rocket" size={10} color="#900" />),
+            icon: () => (<Ionicons name="qr-code-outline" size={20} color="black" />),
             goto: 'QRCreateScreen',
             activeStyle: {},
             navGroup: ["QRCreateScreen"],
@@ -31,7 +32,7 @@ const TabBar = () => {
             id: 2,
             name: 'NFCScreen',
             label: 'NFC',
-            icon: () => (<Icon name="rocket" size={10} color="#900" />),
+            icon: () => (<MaterialCommunityIcons name="nfc" size={20} color="black" />),
             goto: 'NFCScreen',
             activeStyle: {},
             navGroup: ["NFCScreen"],

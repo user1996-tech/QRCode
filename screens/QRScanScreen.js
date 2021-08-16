@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Dimensions, View, Text, StyleSheet, Linking, TouchableOpacity } from 'react-native';
+import { Modal, Alert, View, Text, StyleSheet, Linking, TouchableOpacity, Touchable } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
 import TabBar from './assets/TabBar';
@@ -9,8 +9,24 @@ const QRScanScreen = () => {
     const scanner = useRef(null)
     const [scanStatus, setScanStatus] = useState(false)
     const [scanResult, setScanResult] = useState('')
+    const [modalStatus, setModalStatus] = useState(false)
     return (
         <View style={styles.container}>
+            <Modal
+                transparent
+                visible={modalStatus}
+                animationType="slide"
+                onRequestClose={() => {
+                    setModalStatus(false)
+                }}
+            >
+                <TouchableOpacity style={styles.modalBackground} onPress={() => setModalStatus(false)}>
+                    <TouchableOpacity style={styles.modalContainer} activeOpacity={1} onPress={() => {Linking.openURL(scanResult)}}>
+                        <Text>Go to URL?</Text>
+                        <Text>{scanResult}</Text>
+                    </TouchableOpacity>
+                </TouchableOpacity>
+            </Modal>
             <View style={styles.contentContainer}>
                 <View style={styles.topContainer}>
                     <QRCodeScanner
@@ -18,9 +34,11 @@ const QRScanScreen = () => {
                         onRead={(e) => {
                             setScanResult(e.data)
                             setScanStatus(true)
-                            // Linking.openURL(e.data).catch(err =>
-                            // console.error('An error occured', err)
-                            // );
+                            const supported = Linking.canOpenURL(e.data)
+                            if(supported){
+                                setModalStatus(true)
+                            }
+
                         }}
                     />
                 </View>
@@ -90,5 +108,20 @@ const styles = StyleSheet.create({
         paddingHorizontal: 60,
         borderRadius: 10,
         backgroundColor: 'blue',
+    }, 
+    modalBackground: {
+        flex: 1, 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        backgroundColor: '#ababab90', 
+    }, 
+    modalContainer: {
+        backgroundColor: 'white', 
+        height: 100, 
+        width: 500, 
+        marginHorizontal: 40,
+        textAlign: 'center', 
+        justifyContent: 'center', 
+        alignItems: 'center',
     }
 })
