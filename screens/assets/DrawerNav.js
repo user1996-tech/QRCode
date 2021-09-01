@@ -4,6 +4,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { State, PanGestureHandler } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
 import { GLOBAL } from './GLOBAL';
 
 const dragWidth = GLOBAL.screenWidth * 0.5
@@ -20,7 +21,7 @@ const DrawerContentList = [
     },
     {
         id: "1",
-        icon: "",
+        icon: () => (<Feather name="bluetooth" size={20} color="black" />),
         label: "Bluetooth",
         goto: "Bluetooth",
         navGroup: ["Bluetooth"],

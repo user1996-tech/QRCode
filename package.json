@@ -15,6 +15,7 @@
     "@react-navigation/stack": "^6.0.4",
     "react": "16.13.1",
     "react-native": "0.63.4",
+    "react-native-bluetooth-serial": "^1.0.0-rc1",
     "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera.git",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-nfc-manager": "^3.10.0",
