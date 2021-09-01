@@ -5,7 +5,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { GLOBAL } from './GLOBAL';
 
-const TabBar = () => {
+const TabBarNav = () => {
     const navigation = useNavigation();
     const route = useRoute();
     const activeColor = 'blue'
@@ -66,7 +66,7 @@ const TabBar = () => {
         </View>
     )
 }
-export default TabBar;
+export default TabBarNav;
 
 const styles = StyleSheet.create({
     tabBarContainer: {

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { Dimensions, View, Text, StyleSheet } from 'react-native';
-import TabBar from './assets/TabBar';
+import TabBarNav from './assets/TabBarNav';
 import { GLOBAL } from './assets/GLOBAL';
 import NfcManager, {NfcEvents} from 'react-native-nfc-manager';
 
@@ -39,7 +39,7 @@ const NFCScreen = () => {
       <View style={styles.contentContainer}>
         <Text>NFCScreen</Text>
       </View>
-      <TabBar />      
+      <TabBarNav />      
     </View>
   )
 }
