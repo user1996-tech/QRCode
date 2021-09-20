@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Image, View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
-import TabBarNav from './assets/TabBarNav';
+import TabBarNavQR from './assets/TabBarNavQR';
 import DrawerNav from './assets/DrawerNav';
 import { GLOBAL } from './assets/GLOBAL';
 
@@ -55,7 +55,7 @@ const QRCreateScreen = () => {
             </View>
           </View>
         </View>
-        <TabBarNav />
+        <TabBarNavQR />
       </View>
     } />
   )

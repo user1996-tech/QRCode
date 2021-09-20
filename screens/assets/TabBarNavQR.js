@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { GLOBAL } from './GLOBAL';
 
-const TabBarNav = () => {
+const TabBarNavQR = () => {
     const navigation = useNavigation();
     const route = useRoute();
     const activeColor = 'blue'
@@ -28,15 +27,6 @@ const TabBarNav = () => {
             activeStyle: {},
             navGroup: ["QRCreateScreen"],
         },
-        {
-            id: 2,
-            name: 'NFCScreen',
-            label: 'NFC',
-            icon: () => (<MaterialCommunityIcons name="nfc" size={20} color="black" />),
-            goto: 'NFCScreen',
-            activeStyle: {},
-            navGroup: ["NFCScreen"],
-        }
     ]
     return (
         <View style={styles.tabBarContainer}>
@@ -66,7 +56,7 @@ const TabBarNav = () => {
         </View>
     )
 }
-export default TabBarNav;
+export default TabBarNavQR;
 
 const styles = StyleSheet.create({
     tabBarContainer: {

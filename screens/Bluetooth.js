@@ -8,6 +8,8 @@ const Bluetooth = ({ navigation }) => {
     const [BTStatus, setBTStatus] = useState("")
     const [textBox1, setTextBox1] = useState("")
     const [textBox2, setTextBox2] = useState("")
+    const [textBox1Modal, setTextBox1Modal] = useState("")
+    const [textBox2Modal, setTextBox2Modal] = useState("")
 
     useEffect(() => {
         BluetoothSerial.isEnabled().then(response => {
@@ -67,10 +69,17 @@ const Bluetooth = ({ navigation }) => {
                             data={textBox1}
                             renderItem={({ item }) => {
                                 return (
-                                    <TouchableOpacity>
-                                        <Text>
-                                            {item.name}
-                                        </Text>
+                                    <TouchableOpacity style={styles.textBox1Item}>
+                                        <View style={{ flex: 1, justifyContent: 'center'}}>
+                                            <Text>
+                                                {item.name}
+                                            </Text>
+                                        </View>
+                                        <View style={{ flex: 1, justifyContent: 'center'}}>
+                                            <Text>
+                                                {item.id}
+                                            </Text>
+                                        </View>
                                     </TouchableOpacity>
                                 )
                             }}
@@ -82,11 +91,16 @@ const Bluetooth = ({ navigation }) => {
 
                     <TouchableOpacity style={styles.button} onPress={
                         () => {
+                            setTextBox2("Scanning")
                             BluetoothSerial.discoverUnpairedDevices()
                                 .then(
                                     response => {
                                         console.log(response)
                                         setTextBox2(response)
+                                    }
+                                ).catch(
+                                    err => {
+                                        console.log(err)
                                     }
                                 )
                         }
@@ -94,19 +108,27 @@ const Bluetooth = ({ navigation }) => {
                         <Text style={styles.buttonText}>Scan For New Devices</Text>
                     </TouchableOpacity>
                     <View style={styles.textContainer}>
-                    <FlatList
-                            data={textBox2}
-                            renderItem={({ item }) => {
-                                console.log(item)
-                                return (
-                                    <TouchableOpacity>
-                                        <Text>
-                                            {item.name}
-                                        </Text>
-                                    </TouchableOpacity>
-                                )
-                            }}
-                        />
+                        {
+                            textBox2 != "Scanning" ?
+
+                                <FlatList
+                                    data={textBox2}
+                                    renderItem={({ item }) => {
+                                        console.log(item)
+                                        return (
+                                            <TouchableOpacity>
+                                                <Text>
+                                                    {item.name}
+                                                </Text>
+                                            </TouchableOpacity>
+                                        )
+                                    }}
+                                /> :
+                                <Text>
+                                    {textBox2}
+                                </Text>
+
+                        }
                         <TouchableOpacity style={styles.TOClose} onPress={() => setTextBox2("")}>
                             <Feather name={"x-square"} size={20} color="red" />
                         </TouchableOpacity>
@@ -172,5 +194,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 2,
         bottom: 2,
+    },
+    textBox1Item: {
+        flexDirection: 'row', 
     },
 })

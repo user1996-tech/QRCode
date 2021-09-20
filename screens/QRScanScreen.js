@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Modal, Alert, View, Text, StyleSheet, Linking, TouchableOpacity, Touchable } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
-import TabBarNav from './assets/TabBarNav';
+import TabBarNavQR from './assets/TabBarNavQR';
 import DrawerNav from './assets/DrawerNav';
 import { GLOBAL } from './assets/GLOBAL';
 
@@ -65,7 +65,7 @@ const QRScanScreen = () => {
                         }
                     </View>
                 </View>
-                <TabBarNav />
+                <TabBarNavQR />
             </View>
         } />
 

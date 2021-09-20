@@ -1,16 +1,28 @@
 import React, { useRef, useState } from 'react';
 import { FlatList, View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute, useFocusEffect, useCallback } from '@react-navigation/native';
 import { State, PanGestureHandler } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { GLOBAL } from './GLOBAL';
 
 const dragWidth = GLOBAL.screenWidth * 0.5
 const dragThreshold = dragWidth * 0.5
 
 const DrawerContentList = [
+    /*
+    {
+        id: "", 
+        icon: , 
+        label: "", 
+        goto: "", 
+        navGroup: [], 
+        activeStyle: {}, 
+    }, 
+    */
+
     {
         id: "0",
         icon: () => (<Ionicons name="md-scan" size={20} color="black" />),
@@ -26,7 +38,15 @@ const DrawerContentList = [
         goto: "Bluetooth",
         navGroup: ["Bluetooth"],
         activeStyle: {},
-    }, 
+    },
+    {
+        id: "2",
+        icon: () => (<MaterialCommunityIcons name="nfc" size={20} color="black" />),
+        label: " NFC",
+        goto: "NFCRead",
+        navGroup: ["NFCRead", "NFCWrite"],
+        activeStyle: {},
+    },
 ]
 
 const RenderDrawerItem = (item, navigation, route) => {
@@ -43,7 +63,7 @@ const RenderDrawerItem = (item, navigation, route) => {
         item.activeStyle.backgroundColor = nonActiveBackgroundColor
     }
     return (
-        <TouchableOpacity style={[styles.drawerItem, {backgroundColor: item.activeStyle.backgroundColor}]} onPress={() => navigation.navigate(item.goto)}>
+        <TouchableOpacity style={[styles.drawerItem, { backgroundColor: item.activeStyle.backgroundColor }]} onPress={() => navigation.navigate(item.goto)}>
             <View style={styles.drawerItemIconContainer}>
                 {
                     item.icon()
@@ -89,6 +109,9 @@ const DrawerNav = ({ content }) => {
             }
         }
     }
+
+    useFocusEffect(React.useCallback(() => {
+    },[]))
     return (
         <PanGestureHandler
             onGestureEvent={gestureEvent}
@@ -130,8 +153,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     screen1: {
-        // backgroundColor: '#5f9ea0',
-        height: GLOBAL.screenHeight,
+        height: GLOBAL.screenHeight - GLOBAL.statusBarHeight,
         width: GLOBAL.screenWidth,
     },
     screen2: {
