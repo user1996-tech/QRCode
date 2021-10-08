@@ -16,113 +16,6 @@ const NFCRead = () => {
   const [prompt, setPrompt] = useOutlet('androidPrompt')
   const [tag, setTag] = useOutlet('tag')
 
-  // const displayOutput = (input) => {
-  //   const test = Ndef.uri.decodePayload(input.ndefMessage[0].payload)
-  //   console.log(JSON.stringify(input))
-  //   const determineType = (varr) => {
-  //     const type = Object.prototype.toString.call(varr)
-  //     let result = ''
-  //     if (typeof (varr) == "function") {
-  //       result = 'Function'
-  //     } else {
-
-  //       if (type == "[object Array]") {
-  //         result = 'Array'
-  //       } else if (type == "[object Object]") {
-  //         result = 'Object'
-  //       } else if (type == "[object Number]") {
-  //         result = "Number"
-  //       } else if (type == "[object String]") {
-  //         result = 'String'
-  //       } else if (type == "[object Boolean]") {
-  //         result = 'Boolean'
-  //       } else {
-  //         result = ''
-  //       }
-  //     }
-
-  //     return (result)
-  //   }
-
-  //   const arrayStringFunc = () => {
-  //     // return()
-  //   }
-
-  //   const determinePrintValue = (varr, varrType, varrKey) => {
-  //     let result = ''
-  //     if (varrType == "String" || varrType == "Number") {
-  //       if (varrKey == null) {
-  //         result = varr
-  //         return (result)
-  //       } else {
-  //         result = varrKey + ': ' + varr
-  //         return (<Text>{result}</Text>)
-  //       }
-  //     } else if (varrType == "Boolean") {
-  //       result = varrKey + ': ' + varr.toString()
-  //       return (<Text>{result}</Text>)
-
-  //     } else if (varrType == "Array") {
-
-  //       result = varrKey + ": \r\n"
-  //       const length = varr.length
-  //       for (let i = 0; i < length; i++) {
-  //         const value = varr[i]
-  //         const type = determineType(value)
-  //         if (i != 0) {
-  //           result += "\r\n"
-  //         }
-  //         result += determinePrintValue(value, type, null)
-
-
-  //       }
-  //       return (<Text>{result}</Text>)
-
-  //     } else if (varrType == "Object") {
-  //       const keys = Object.keys(varr)
-  //       const length = keys.length
-  //       for (let i = 0; i < length; i++) {
-  //         const key = keys[i]
-  //         const value = varr[key]
-  //         const type = determineType(value)
-  //         if (i != 0) {
-  //           result += "\r\n"
-  //         }
-  //         result += key + ': '
-  //         result += determinePrintValue(value, type, null)
-  //       }
-  //       return (result)
-
-  //     } else if (varrType == "Function") {
-  //       result = "Function"
-  //       return(<Text>{result}</Text>)
-  //     } else {
-  //       result = varr
-  //       return (result)
-
-  //     }
-  //   }
-
-  //   const keys = Object.keys(input)
-  //   var index = 0
-  //   if (input == '') {
-  //     return (
-  //       <Text></Text>
-  //     )
-  //   } else {
-
-  //     return (
-  //       keys.map((key) => {
-  //         const value = input[key]
-  //         const type = determineType(value)
-  //         const printValue = determinePrintValue(value, type, key)
-  //         return (printValue)
-
-  //       })
-  //     )
-  //   }
-
-  // }
   const TNF_MAP = {
     EMPTY: 0x0,
     WELL_KNOWN: 0x01,
@@ -145,7 +38,6 @@ const NFCRead = () => {
   };
 
   const displayOutput = (input) => {
-    console.log(input)
     const openURL = async (uri) => {
       try{
         Linking.openURL(uri)

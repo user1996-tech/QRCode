@@ -64,16 +64,22 @@ class NfcProxy {
 
         try {
             console.log('start write')
+            console.log(writeTagOptions)
             await NfcManager.requestTechnology([NfcTech.Ndef])
             const textInputValue = writeTagOptions.textInputValue
             const type = writeTagOptions.type
+            const title = writeTagOptions.title
             let bytes = null
 
             if (type == 'Text') {
                 bytes = Ndef.encodeMessage([Ndef.textRecord(textInputValue)])
             } else if (type == 'URL') {
-                const prefix = 'https://'
-                bytes = Ndef.encodeMessage([Ndef.uriRecord(prefix + textInputValue)])
+                if (title == "---"){
+                    bytes = Ndef.encodeMessage([Ndef.uriRecord(textInputValue)])
+                } else {
+                    const prefix = writeTagOptions.title
+                    bytes = Ndef.encodeMessage([Ndef.uriRecord(prefix + textInputValue)])
+                }
             } else if (type == 'Tel') {
                 const prefix = 'tel:'
                 bytes = Ndef.encodeMessage([Ndef.uriRecord(prefix + textInputValue)])

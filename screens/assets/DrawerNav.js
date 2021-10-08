@@ -5,6 +5,7 @@ import { State, PanGestureHandler } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
+import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { GLOBAL } from './GLOBAL';
 
@@ -47,6 +48,39 @@ const DrawerContentList = [
         navGroup: ["NFCRead", "NFCWrite"],
         activeStyle: {},
     },
+    {
+        id: "3",
+        icon: () => (<MaterialCommunityIcons name="animation-play" size={20} color="black" />),
+        label: "Reanimated",
+        goto: "Reanimated",
+        navGroup: ["Reanimated"],
+        activeStyle: {},
+    },
+    {
+        id: "4",
+        icon: () => (<MaterialCommunityIcons name="gesture-swipe" size={20} color="black" />),
+        label: "SwipeBack",
+        goto: "SwipeBack",
+        navGroup: ["SwipeBack"],
+        activeStyle: {},
+    },
+    {
+        id: "5",
+        icon: () => (<Entypo name="location-pin" size={20} color="black" />),
+        label: "Location",
+        goto: "Location",
+        navGroup: ["Location"],
+        activeStyle: {},
+    },
+    {
+        id: "6",
+        icon: () => (<Entypo name="compass" size={20} color="black" />),
+        label: "Compass",
+        goto: "Compass",
+        navGroup: ["Compass"],
+        activeStyle: {},
+    },
+
 ]
 
 const RenderDrawerItem = (item, navigation, route) => {
@@ -111,7 +145,7 @@ const DrawerNav = ({ content }) => {
     }
 
     useFocusEffect(React.useCallback(() => {
-    },[]))
+    }, []))
     return (
         <PanGestureHandler
             onGestureEvent={gestureEvent}
@@ -134,11 +168,20 @@ const DrawerNav = ({ content }) => {
                 </SafeAreaView>
 
                 <SafeAreaView style={{ height: GLOBAL.screenHeight, width: GLOBAL.screenWidth }}>
-                    <View style={styles.screen1}>
+                    <TouchableOpacity activeOpacity={1} style={styles.screen1}
+                        onPress={() => {
+                            if (drawerState) {
+                                scrollViewRef.current.scrollTo(
+                                    { x: dragWidth, y: 0, animated: true }
+                                )
+                                setDrawerState(false)
+                            }
+                        }}
+                    >
                         {
                             content
                         }
-                    </View>
+                    </TouchableOpacity>
 
                 </SafeAreaView>
 
