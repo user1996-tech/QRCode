@@ -1,8 +1,7 @@
-import { Dimensions } from 'react-native';
+import {useRef} from 'react';
+import { Dimensions, StatusBar } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
-import { get } from 'react-native/Libraries/Utilities/PixelRatio';
 
-console.log(getStatusBarHeight())
 const GLOBALFunction = () => {
     const screenWidth = Dimensions.get('window').width
     const screenHeight = Dimensions.get('window').height
@@ -10,6 +9,7 @@ const GLOBALFunction = () => {
     const contentRatio = 1 - tabBarRatio
 
     const GLOBAL = {}
+
     GLOBAL.screenHeight = screenHeight
     GLOBAL.screenWidth = screenWidth
     GLOBAL.tabBarHeight = tabBarRatio * screenHeight

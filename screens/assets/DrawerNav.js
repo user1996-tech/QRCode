@@ -80,6 +80,14 @@ const DrawerContentList = [
         navGroup: ["Compass"],
         activeStyle: {},
     },
+    {
+        id: "7",
+        icon: () => (<Entypo name="spotify" size={20} color="black" />),
+        label: "Spotify",
+        goto: "Spotify",
+        navGroup: ["Spotify"],
+        activeStyle: {},
+    },
 
 ]
 
@@ -111,7 +119,7 @@ const RenderDrawerItem = (item, navigation, route) => {
 }
 
 
-const DrawerNav = ({ content }) => {
+const DrawerNav = ({ content, gestureRefList, gestureRef }) => {
     const navigation = useNavigation()
     const route = useRoute()
     const scrollViewRef = useRef(0)
@@ -148,6 +156,8 @@ const DrawerNav = ({ content }) => {
     }, []))
     return (
         <PanGestureHandler
+            ref={gestureRef}
+            simultaneousHandlers={gestureRefList}
             onGestureEvent={gestureEvent}
             onHandlerStateChange={handlerStateChange}
         >
@@ -170,6 +180,7 @@ const DrawerNav = ({ content }) => {
                 <SafeAreaView style={{ height: GLOBAL.screenHeight, width: GLOBAL.screenWidth }}>
                     <TouchableOpacity activeOpacity={1} style={styles.screen1}
                         onPress={() => {
+                            console.log('press')
                             if (drawerState) {
                                 scrollViewRef.current.scrollTo(
                                     { x: dragWidth, y: 0, animated: true }
@@ -178,9 +189,11 @@ const DrawerNav = ({ content }) => {
                             }
                         }}
                     >
+                    {/* <View style={styles.screen1}> */}
                         {
                             content
                         }
+                    {/* </View> */}
                     </TouchableOpacity>
 
                 </SafeAreaView>

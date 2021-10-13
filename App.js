@@ -10,6 +10,10 @@ import Reanimated from './screens/Reanimated';
 import SwipeBack from './screens/SwipeBack';
 import Location from './screens/Location';
 import Compass from './screens/Compass';
+import Spotify from './screens/Spotify';
+import SpotifySearch from './screens/SpotifySearch';
+import SpotifyLibrary from './screens/SpotifyLibrary';
+
 
 const Stack = createStackNavigator();
 
@@ -18,6 +22,9 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false,  }}>
+        <Stack.Screen name="Spotify" component={Spotify} options={{ animationEnabled: false }} />
+        <Stack.Screen name="SpotifySearch" component={SpotifySearch} options={{ animationEnabled: false }} />
+        <Stack.Screen name="SpotifyLibrary" component={SpotifyLibrary} options={{ animationEnabled: false }} />
         <Stack.Screen name="NFCRead" component={NFCRead} options={{ animationEnabled: false }} />
         <Stack.Screen name="NFCWrite" component={NFCWrite} options={{ animationEnabled: false }} />
         <Stack.Screen name="Bluetooth" component={Bluetooth}  />
