@@ -13,3 +13,7 @@ getNewOutlet('writeTagOptions', {
     type: '', 
     textInputValue: '', 
 }, { autoDelete: false })
+
+getNewOutlet('spotifyTheme', {
+    value: 'light', 
+}, { autoDelete : false })

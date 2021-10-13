@@ -1,35 +1,15 @@
-import React, { useRef, } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, ScrollView, Image, FlatList, StatusBar, SafeAreaView } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Feather from 'react-native-vector-icons/Feather';
 import DrawerNav from './assets/DrawerNav';
 import TabBarNavSpotify from './assets/TabBarNavSpotify';
-import { GLOBAL } from './assets/GLOBAL';
+import SpotifyPlayer from './assets/SpotifyPlayer'
+import { GLOBAL, SPOTIFY } from './assets/GLOBAL';
 import { NativeViewGestureHandler } from 'react-native-gesture-handler';
 
-const theme = 'dark'
 
-const fontsFunc = () => {
-    const result = {}
-    result.textSize1 = 25
-    result.textSize2 = 20
-    result.textSize3 = 17
-    result.textSize4 = 15
-    result.textSize5 = 12
-
-    result.backgroundColor = 'white'
-    result.primaryFontColor = 'black'
-    result.secondaryFontColor = 'grey'
-
-    if (theme == 'dark') {
-        result.backgroundColor = 'black'
-        result.primaryFontColor = 'white'
-        result.secondaryFontColor = 'grey'
-    }
-
-    return result
-}
-const fonts = fontsFunc()
+const fonts = SPOTIFY
 
 const yourShowsList = [
 
@@ -222,19 +202,27 @@ const Spotify = () => {
     const flatListRef = useRef(null)
     const scrollViewRef = useRef(null)
     const gestureRef = useRef(null)
-    console.log(GLOBAL.tabBarHeight)
+
+    
+    const [playerState, setPlayerState] = useState(true)
+    let playerSpacerHeight = 0
+    if (playerState){
+        playerSpacerHeight = GLOBAL.spotifyPlayerHeight
+    }
     return (
         // <DrawerNav
         //     gestureRef={gestureRef}
         //     gestureRefList={flatListRef}
         //     content={
-        <SafeAreaView style={{ flex: 1, }}>
+        <View style={{ flex: 1, backgroundColor: 'blue', position: 'relative' }}>
             <StatusBar
                 backgroundColor={'#00000090'}
                 translucent={true}
             />
             <ScrollView style={styles.contentContainer}>
+                <View style={styles.statusBarSpacerContainer}>
 
+                </View>
                 <View style={styles.headerContainer}>
                     <Text style={styles.headerText}>Good evening</Text>
                     <View style={styles.headerIconContainer}>
@@ -358,12 +346,23 @@ const Spotify = () => {
                     />
                 </View>
 
-                <View style={{ width: '100%', height: 100 }}>
-                                <Text style={{color: fonts.primaryFontColor}}>Something</Text>
+                <View style={[styles.spotifyPlayerSpacerContainer, { height: playerSpacerHeight }]}>
                 </View>
+                <View style={styles.tabBarSpacerContainer}>
+                </View>
+
             </ScrollView>
-            {/* <TabBarNavSpotify /> */}
-        </SafeAreaView>
+            {playerState ?
+                (
+                    <SpotifyPlayer />
+                ) :
+                (
+                    <View>
+                    </View>
+                )
+            }
+            <TabBarNavSpotify />
+        </View>
 
 
 
@@ -373,12 +372,17 @@ const Spotify = () => {
 export default Spotify;
 
 const styles = StyleSheet.create({
+    statusBarSpacerContainer: {
+        width: '100%',
+        height: StatusBar.currentHeight
+    },
+    tabBarSpacerContainer: {
+        width: '100%',
+        height: GLOBAL.spotifyTabBarHeight,
+    },
     contentContainer: {
-        height: GLOBAL.contentHeight,
-        // height: '100%',
-        width: '100%', 
+        flex: 1,
         paddingHorizontal: 10,
-        paddingTop: StatusBar.currentHeight,
         backgroundColor: fonts.backgroundColor
     },
     headerContainer: {
@@ -504,4 +508,5 @@ const styles = StyleSheet.create({
     mixesContainer: {
 
     },
+
 })

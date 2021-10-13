@@ -2,17 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { GLOBAL } from './GLOBAL';
+import { getOutlet } from 'reconnect.js';
+import { GLOBAL, SPOTIFY } from './GLOBAL';
+
+const fonts = SPOTIFY
 
 const TabBarNavSpotify = () => {
     const navigation = useNavigation();
     const route = useRoute();
-    const activeColor = 'transparent'
+    
     const tabs = [
         {
             id: 0,
             name: 'SpotifyHome',
-            icon: () => (<Ionicons name="ios-home-outline" size={20} color="black" />),
+            label: 'Home',
+            icon: () => (<Ionicons name="ios-home-outline" size={22} color={fonts.primaryFontColor} />),
+            activeIcon: () => (<Ionicons name="ios-home" size={25} color={fonts.primaryFontColor} />),
             goto: 'Spotify',
             activeStyle: {},
             navGroup: ["Spotify"],
@@ -20,7 +25,9 @@ const TabBarNavSpotify = () => {
         {
             id: 1,
             name: 'SpotifySearch',
-            icon: () => (<Ionicons name="ios-search-outline" size={20} color="black" />),
+            label: 'Search',
+            icon: () => (<Ionicons name="ios-search-outline" size={22} color={fonts.primaryFontColor} />),
+            activeIcon: () => (<Ionicons name="ios-search-sharp" size={25} color={fonts.primaryFontColor} />),
             goto: 'SpotifySearch',
             activeStyle: {},
             navGroup: ["SpotifySearch"],
@@ -28,7 +35,9 @@ const TabBarNavSpotify = () => {
         {
             id: 2,
             name: 'SpotifyLibrary',
-            icon: () => (<Ionicons name="ios-library" size={20} color="black" />),
+            label: 'Library',
+            icon: () => (<Ionicons name="ios-library-outline" size={22} color={fonts.primaryFontColor} />),
+            activeIcon: () => (<Ionicons name="ios-library" size={25} color={fonts.primaryFontColor} />),
             goto: 'SpotifyLibrary',
             activeStyle: {},
             navGroup: ["SpotifyLibrary"],
@@ -39,15 +48,19 @@ const TabBarNavSpotify = () => {
             {
                 tabs.map(
                     (item) => {
+                        let displayIcon = item.icon
                         if (item.navGroup.includes(route.name)) {
-                            item.activeStyle.backgroundColor = activeColor
+                            displayIcon = item.activeIcon
                         }
                         return (
                             <TouchableOpacity key={item.id} style={[styles.tabContainer, item.activeStyle]}
                                 onPress={() => { navigation.navigate(item.goto) }}
                             >
                                 <View style={styles.tabIconContainer}>
-                                    {item.icon()}
+                                    {displayIcon()}
+                                </View>
+                                <View style={styles.tabTextContainer}>
+                                    <Text style={styles.tabText}>{item.label}</Text>
                                 </View>
                             </TouchableOpacity>
 
@@ -63,11 +76,14 @@ export default TabBarNavSpotify;
 
 const styles = StyleSheet.create({
     tabBarContainer: {
-        height: GLOBAL.tabBarHeight,
-        width: GLOBAL.tabBarWidth,
-        backgroundColor: 'transparent',
+        position: 'absolute', 
+        bottom: 0, 
+        zIndex:100, 
+        height: GLOBAL.spotifyTabBarHeight,
+        width: GLOBAL.spotifyTabBarWidth,
+        backgroundColor: fonts.backgroundColor,
         flexDirection: 'row',
-        opacity: 0.5,
+        opacity: 0.9,
     },
     tabContainer: {
         flex: 1,
@@ -76,6 +92,12 @@ const styles = StyleSheet.create({
     tabIconContainer: {
         flex: 2,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
+    },
+    tabTextContainer: {
+        flex: 1, 
+        alignItems: 'center', 
+        justifyContent: 'flex-start', 
+        color: fonts.primaryFontColor,
     },
 })
