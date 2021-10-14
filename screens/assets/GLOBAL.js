@@ -44,11 +44,13 @@ const SPOTIFYFunction = (theme) => {
     result.iconSize2 = 22
 
     result.backgroundColor = 'white'
+    result.backgroundColorInverse = 'black'
     result.primaryFontColor = 'black'
     result.secondaryFontColor = 'grey'
 
     if (theme == 'dark') {
         result.backgroundColor = 'black'
+        result.backgroundColorInverse = 'white'
         result.primaryFontColor = 'white'
         result.secondaryFontColor = 'grey'
     }

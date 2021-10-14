@@ -13,6 +13,8 @@ import Compass from './screens/Compass';
 import Spotify from './screens/Spotify';
 import SpotifySearch from './screens/SpotifySearch';
 import SpotifyLibrary from './screens/SpotifyLibrary';
+import SpotifyPlayerScreen from './screens/SpotifyPlayerScreen';
+import Test from './screens/Test';
 
 
 const Stack = createStackNavigator();
@@ -21,13 +23,14 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false,  }}>
+      <Stack.Navigator screenOptions={{ headerShown: false, }}>
+        <Stack.Screen name="SpotifyPlayerScreen" component={SpotifyPlayerScreen} options={{ animationEnabled: false }} />
         <Stack.Screen name="Spotify" component={Spotify} options={{ animationEnabled: false }} />
         <Stack.Screen name="SpotifySearch" component={SpotifySearch} options={{ animationEnabled: false }} />
         <Stack.Screen name="SpotifyLibrary" component={SpotifyLibrary} options={{ animationEnabled: false }} />
         <Stack.Screen name="NFCRead" component={NFCRead} options={{ animationEnabled: false }} />
         <Stack.Screen name="NFCWrite" component={NFCWrite} options={{ animationEnabled: false }} />
-        <Stack.Screen name="Bluetooth" component={Bluetooth}  />
+        <Stack.Screen name="Bluetooth" component={Bluetooth} />
         <Stack.Screen name="QRScanScreen" component={QRScanScreen} options={{ animationEnabled: false }} />
         <Stack.Screen name="QRCreateScreen" component={QRCreateScreen} options={{ animationEnabled: false }} />
         <Stack.Screen name="Reanimated" component={Reanimated} options={{ animationEnabled: false }} />
